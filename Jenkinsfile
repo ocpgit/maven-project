@@ -1,8 +1,5 @@
 pipeline {
     agent any
-    tools{
-        maven 'wsl-maven'
-    }
     stages{
         stage ('build'){
             steps{
@@ -12,8 +9,8 @@ pipeline {
                 success {
                     echo 'starting archiving artifacts...'
                     archiveArtifacts artifacts: '**/target/*.war'
-        
                 }
            }
         }
+    }
 }
