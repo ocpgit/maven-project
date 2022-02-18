@@ -1,17 +1,19 @@
 pipeline {
     agent any
     tools{
-        maven 'local maven'
+        maven 'wsl-maven'
     }
     stages{
         stage ('build'){
             steps{
                 sh 'mvn clean package'
-                sh "/usr/local/bin/docker build . -t tomcatwebapp:${env.BUILD_ID}"
-        
             }
+            post {
+                success {
+                    echo 'starting archiving artifacts...'
+                    archiveArtifacts artifacts: '**/target/*.war'
+        
+                }
+           }
         }
-    }
-
-  
 }
