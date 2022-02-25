@@ -7,7 +7,7 @@ pipeline {
         stage ('build'){
             steps{
                 sh 'mvn clean package'
-                sh "docker -H 192.168.2.100 build . -t tomcatwebapp:${env.BUILD_ID}"
+                sh "docker -H localhost:2375 build . -t tomcatwebapp:${env.BUILD_ID}"
             }
         }   
 
